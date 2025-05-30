@@ -41,7 +41,7 @@ export function Navbar() {
                 <div className='flex gap-6 items-center text-lg font-medium text-black'>
                     {
                         navItems.map(({ name, href, subItems }) => (
-                            <Link href={href} className={cn(pathname == href && 'text-blue-400 duration-400 ', "hover:text-blue-400 ")} key={name}>
+                            <Link href={href} className={cn(pathname == href && 'text-blue-400 duration-400 ', "hover:text-blue-400")} key={name}>
                                 {name == 'Study Resources' ?
                                     (
                                         <DropdownMenu>

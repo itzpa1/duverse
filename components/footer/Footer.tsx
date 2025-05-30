@@ -51,7 +51,7 @@ const Footer = () => {
                     </Link>
                     <p className='text-zinc-400 leading-tight'>Your comprehensive guide to Delhi University life, resources, and community.</p>
                     <div className="social-links flex flex-col gap-2 mt-4 ">
-                        <h1 className='text-2xl font-semibold '>Let's Connect:</h1>
+                        <h1 className='text-2xl font-semibold '>Let&apos;s Connect:</h1>
                         <div className='flex items-center gap-2'>
                             {socailLinks.map(({ name, href, icon }) => (
                                 <Link href={href} className='bg-blue-400/40 text-black/70 hover:bg-blue-400 duration-400 rounded-full p-2 aspect-square ' title={name} key={name} >{icon}</Link>

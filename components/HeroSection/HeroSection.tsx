@@ -37,7 +37,7 @@ const HeroSection = () => {
                             </Button>
                         </div>
                         <p className="text-xs text-gray-500 dark:text-gray-400">
-                            Try "B.A. Program English PYQs" or "B.Com 2nd Year Notes"
+                            Try &quot;B.A. Program English PYQs&quot; or &quot;B.Com 2nd Year Notes&quot;
                         </p>
                     </div>
 
