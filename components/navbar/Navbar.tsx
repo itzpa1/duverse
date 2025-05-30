@@ -2,18 +2,13 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
 import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 
@@ -55,7 +50,7 @@ export function Navbar() {
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent className="w-auto">
                                                 {subItems?.map(({ name, href }) => (
-                                                    <DropdownMenuItem>
+                                                    <DropdownMenuItem key={name}>
                                                         <Link href={`/resources${href}`}>{name}</Link>
                                                     </DropdownMenuItem>
                                                 ))}

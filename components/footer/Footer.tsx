@@ -1,4 +1,4 @@
-import { Facebook, Heart, HeartIcon, Instagram, Link2, X, Youtube } from 'lucide-react'
+import { Facebook, Heart, Instagram, Link2, Youtube } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { DropdownMenuSeparator } from '../ui/dropdown-menu'
