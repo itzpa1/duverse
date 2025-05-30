@@ -23,8 +23,8 @@ export function Navbar() {
     const navItems = [
         { name: 'Home', href: '/' },
         {
-            name: 'Study Materials',
-            href: '/materials',
+            name: 'Study Resources',
+            href: '/resources',
             subItems: [
                 { name: 'PYQs', href: '/pyqs' },
                 { name: 'Notes', href: '/notes' },
@@ -46,17 +46,17 @@ export function Navbar() {
                 <div className='flex gap-6 items-center text-lg font-medium text-black'>
                     {
                         navItems.map(({ name, href, subItems }) => (
-                            <Link href={href} className={cn(pathname == href && 'text-blue-400 duration-400 underline underline-offset-2', "hover:text-blue-400 ")} key={name}>
-                                {name == 'Study Materials' ?
+                            <Link href={href} className={cn(pathname == href && 'text-blue-400 duration-400 ', "hover:text-blue-400 ")} key={name}>
+                                {name == 'Study Resources' ?
                                     (
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
-                                                <Button variant="outline" className='text-lg'>Study Materials <ChevronDown /> </Button>
+                                                <Button variant="outline" className='text-lg'>{name}<ChevronDown /> </Button>
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent className="w-auto">
                                                 {subItems?.map(({ name, href }) => (
                                                     <DropdownMenuItem>
-                                                        <Link href={`/materials${href}`}>{name}</Link>
+                                                        <Link href={`/resources${href}`}>{name}</Link>
                                                     </DropdownMenuItem>
                                                 ))}
 
