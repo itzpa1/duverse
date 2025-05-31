@@ -1,23 +1,37 @@
-import Link from 'next/link'
+"use client"
+
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from '../ui/card'
+import HeroCards from './HeroCards'
+import { TypeAnimation } from 'react-type-animation';
 
 const HeroSection = () => {
     return (
-        <section className="w-full py-12 md:py-24 lg:py-32 flex justify-center">
+        <section className="w-full py-12 md:py-24 lg:py-32 flex justify-center md:bg-gradient-to-b from-blue-400/40 from-70% to-white to-30%">
             <div className="container px-4 md:px-6">
                 <div className="flex flex-col items-center gap-6 text-center">
                     <div className="space-y-4">
-                        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
-                            Delhi University <span className="text-primary">Study Resources</span>
+                        <h1 className="w-full text-4xl flex justify-start gap-2 font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
+                            Delhi University&apos;s
+                            <TypeAnimation
+                                className='text-blue-400 '
+                                sequence={[
+                                    'PYQs',
+                                    1000,
+                                    'Readings',
+                                    1000,
+                                    'Gossips',
+                                    1000,
+                                    'Events',
+                                    1000
+                                ]}
+                                wrapper="span"
+                                speed={50}
+                                repeat={Infinity}
+                            />
                         </h1>
+
+
                         <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
                             Access previous year question papers, solved answers, digital books,
                             and study materials for all courses in one place.
@@ -26,13 +40,13 @@ const HeroSection = () => {
 
                     {/* Search Bar */}
                     <div className="w-full max-w-md space-y-2">
-                        <div className="relative">
+                        <div className="relative bg-white rounded-lg group-hover:border-black/20 border-2 ">
                             <Input
-                                className="h-12 w-full rounded-lg border-gray-300 pl-4 pr-12 shadow-sm dark:border-gray-700"
+                                className="h-12 w-full outline-none pl-4 pr-12 shadow-sm group border-none"
                                 placeholder="Search for courses, subjects, or materials..."
                                 type="search"
                             />
-                            <Button className="absolute right-2 top-1/2 -translate-y-1/2 transform" size="sm">
+                            <Button className="absolute bg-blue-400 hover:bg-blue-400/40 right-2 top-1/2 -translate-y-1/2 transform" size="lg">
                                 Search
                             </Button>
                         </div>
@@ -42,63 +56,7 @@ const HeroSection = () => {
                     </div>
 
                     {/* Quick Links */}
-                    <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
-                        <Card className="hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                                <CardTitle className="text-lg">PYQs</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <CardDescription>
-                                    Previous year question papers with solutions
-                                </CardDescription>
-                                <Button variant="link" className="px-0 mt-2" asChild>
-                                    <Link href="/pyqs">Browse all</Link>
-                                </Button>
-                            </CardContent>
-                        </Card>
-
-                        <Card className="hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                                <CardTitle className="text-lg">Notes</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <CardDescription>
-                                    Comprehensive subject notes and summaries
-                                </CardDescription>
-                                <Button variant="link" className="px-0 mt-2" asChild>
-                                    <Link href="/notes">Browse all</Link>
-                                </Button>
-                            </CardContent>
-                        </Card>
-
-                        <Card className="hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                                <CardTitle className="text-lg">Books</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <CardDescription>
-                                    Digital textbooks and reference materials
-                                </CardDescription>
-                                <Button variant="link" className="px-0 mt-2" asChild>
-                                    <Link href="/books">Browse all</Link>
-                                </Button>
-                            </CardContent>
-                        </Card>
-
-                        <Card className="hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                                <CardTitle className="text-lg">Courses</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <CardDescription>
-                                    Resources organized by course and year
-                                </CardDescription>
-                                <Button variant="link" className="px-0 mt-2" asChild>
-                                    <Link href="/courses">Browse all</Link>
-                                </Button>
-                            </CardContent>
-                        </Card>
-                    </div>
+                    <HeroCards />
                 </div>
             </div>
         </section>
