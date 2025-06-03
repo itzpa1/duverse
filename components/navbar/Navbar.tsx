@@ -11,10 +11,26 @@ import {
 } from '../ui/dropdown-menu'
 import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
+import { useEffect, useState } from 'react'
 
 export function Navbar() {
     const pathname = usePathname()
 
+
+    // NavBar Backdrop Blur on Scroll
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 10);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+
+    // Navmenu items
     const navItems = [
         { name: 'Home', href: '/' },
         {
@@ -23,7 +39,9 @@ export function Navbar() {
             subItems: [
                 { name: 'PYQs', href: '/pyqs' },
                 { name: 'Notes', href: '/notes' },
-                { name: 'Books', href: '/books' }
+                { name: 'Books', href: '/books' },
+                { name: 'Assignments', href: '/assignments' },
+                { name: 'YouTube Sources', href: '/youtube-resources' },
             ]
         },
         { name: 'Papers', href: '/papers' },
@@ -32,7 +50,10 @@ export function Navbar() {
     ]
 
     return (
-        <header className="sticky top-0 z-50 w-full bg-white px-14 sm:px-4 mx-auto items-center justify-items-center ">
+        <header className={`fixed top-0 z-50 w-full bg-white px-14 sm:px-4 mx-auto items-center justify-items-center ${isScrolled
+            ? 'bg-white/80 dark:bg-black/80 backdrop-blur-sm '
+            : 'bg-transparent'
+            }`}>
             <div className="container flex h-16 items-center justify-between w-full">
                 <Link href={'/'} className='text-3xl font-bold flex items-center text-black'>
                     DU<span className='text-blue-400'>Verse</span>
