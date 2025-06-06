@@ -7,7 +7,7 @@ export default function NotFound() {
     <div className='flex flex-col gap-4 items-center justify-center'>
       <Image src={assets.alert404} alt='404 Error' className='w-36 ' />
       <h1 className='text-4xl font-bold'>Not found – 404!</h1>
-      <Link href="/" className='font-medium text-lg hover:underline text-blue-400'>Go back to Home</Link>
+      <Link href="/" className='font-medium text-lg hover:underline text-blue-400 animate-fade-in-scale '>Go back to Home</Link>
     </div>
   </div>
 }

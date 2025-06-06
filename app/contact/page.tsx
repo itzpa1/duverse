@@ -1,114 +1,151 @@
-
 'use client';
 
+import SectionHeader from '@/components/SectionHeader';
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+// import emailjs from "emailjs-com"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
+import { toast } from "sonner"
+import { useState } from "react"
+import Link from 'next/link';
+import { CheckCircle, CornerUpRight, Mail } from 'lucide-react';
+import Image from 'next/image';
+import { assets } from '@/assets/assets';
 
-import SectionHeader from '@/components/SectionHeader/SectionHeader';
-import { useState } from 'react';
+const formSchema = z.object({
+    name: z.string().min(1, "Name is required"),
+    email: z.string().email("Invalid email"),
+    subject: z.string().min(1, "Subject cannot be empty"),
+    message: z.string().min(1, "Message cannot be empty"),
+})
+
+type FormData = z.infer<typeof formSchema>
 
 const ContactForm = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        location: '',
-        message: ''
-    });
+    const [success, setSuccess] = useState(false)
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+        reset,
+    } = useForm<FormData>({
+        resolver: zodResolver(formSchema),
+    })
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log('Form submitted:', formData);
-        // Add your form submission logic here
-    };
+    const onSubmit = async (data: FormData) => {
+        try {
+            // Temporarily disabled EmailJS
+            // const res = await emailjs.send(
+            //   process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+            //   process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+            //   {
+            //     from_name: data.name,
+            //     from_email: data.email,
+            //     message: data.message,
+            //   },
+            //   process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+            // )
+
+            // if (res.status === 200) {
+            //   setSuccess(true)
+            // }
+            console.log("Form submitted:", data)
+            reset()
+            toast.success("Message sent successfully!", {
+                style: {
+                    backgroundColor: "#60a5fa",
+                    color: "white",
+                    border: "none"
+                },
+            })
+        } catch (err) {
+            console.error("Error sending message:", err)
+        }
+    }
+
 
     return (
-        <div className='w-full sm:px-4 px-14 py-4 mt-10 flex flex-col items-center justify-center'>
-            <SectionHeader title='Contact Us' subtitle='Have questions or feedback? We&apos;d love to hear from you.' pt={4} />
-            <h2 className="text-2xl font-bold mb-6">Contact Us</h2>
+        <div className='w-full sm:px-4 px-14 py-4 md:py-6 mt-10 flex flex-col items-center justify-center'>
+            <SectionHeader title='Contact Us ☎️' subtitle='Have questions or feedback? We&apos;d love to hear from you.' pt={4} />
+            <div className=" px-4 flex mt-4 justify-center">
+                <div className="bg-white rounded-2xl shadow-xl w-full max-w-6xl flex flex-col md:flex-row overflow-hidden">
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Contact Form */}
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label htmlFor="name" className="block mb-1">Name</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            className="w-full p-2 border rounded"
-                            required
-                        />
+                    {/* Left: Contact Form */}
+                    <div className="w-full md:w-1/2 p-8 space-y-6 bg-blue-50 from-white to-blue-50 group">
+                        <div className='w-full flex gap-4'>
+                            <div className='flex flex-col w-full justify-between'>
+                                <h1 className="text-2xl font-bold text-black">Get In Touch ❔</h1>
+                                <p>Please provide the following details, and we&apos;ll be in touch as soon as possible.</p>
+                            </div>
+                            <Image src={assets.contact}
+                                className='w-16 object-contain' alt='contact' />
+
+                        </div>
+
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                            <div className="space-y-1">
+                                <Label htmlFor="name">Name</Label>
+                                <Input id="name" {...register("name")} placeholder='Enter Your Name' />
+                                {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+                            </div>
+
+                            <div className="space-y-1">
+                                <Label htmlFor="email">Email</Label>
+                                <Input id="email" type="email" {...register("email")} placeholder='Enter Your Mail' />
+                                {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+                            </div>
+
+                            <div className="space-y-1">
+                                <Label htmlFor="email">Subject</Label>
+                                <Input id="subject" type="text" {...register("subject")} placeholder='Write the subject' />
+                                {errors.subject && <p className="text-red-500 text-sm">{errors.subject.message}</p>}
+                            </div>
+
+                            <div className="space-y-1">
+                                <Label htmlFor="message">Message</Label>
+                                <Textarea id="message" rows={4} {...register("message")} placeholder='write your messages...' />
+                                {errors.message && <p className="text-red-500 text-sm">{errors.message.message}</p>}
+                            </div>
+
+                            <Button type="submit" disabled={isSubmitting} className="w-full bg-blue-400 hover:bg-blue-500">
+                                {isSubmitting ? "Sending..." : "Send Message"}
+                            </Button>
+                        </form>
+
+                        {success && <p className="text-green-600 font-medium flex items-center">
+                            <CheckCircle size={40} />
+                            Message sent successfully!</p>}
                     </div>
 
-                    <div>
-                        <label htmlFor="email" className="block mb-1">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="w-full p-2 border rounded"
-                            required
-                        />
-                    </div>
 
-                    <div>
-                        <label htmlFor="location" className="block mb-1">Location</label>
-                        <input
-                            type="text"
-                            id="location"
-                            name="location"
-                            value={formData.location}
-                            onChange={handleChange}
-                            className="w-full p-2 border rounded"
-                            required
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="message" className="block mb-1">Message</label>
-                        <textarea
-                            id="message"
-                            name="message"
-                            value={formData.message}
-                            onChange={handleChange}
-                            className="w-full p-2 border rounded min-h-[120px]"
-                            required
-                        />
-                    </div>
-
-                    <button
-                        type="submit"
-                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                    >
-                        Send Message
-                    </button>
-                </form>
-
-                {/* Mini Map */}
-                <div>
-                    <h3 className="text-xl font-semibold mb-4">Our Location</h3>
-                    <div className="border rounded-lg overflow-hidden mb-4">
-                        <iframe
-                            width="100%"
-                            height="300"
-                            src="https://maps.google.com/maps?q=University%20of%20Delhi&z=15&output=embed"
-                            style={{ border: 0 }}
-                            allowFullScreen
-                        ></iframe>
-                    </div>
-                    <div className="space-y-2">
-                        <p>University of Delhi, North Campus</p>
-                        <p>Delhi 110007, India</p>
-                        <p>Email: contact@duresources.com</p>
+                    {/* Right: Map + Info */}
+                    <div className="w-full md:w-1/2 p-8 bg-white flex flex-col justify-end gap-4 relative ">
+                        {/* <div className="flex flex-col">
+                            <Link
+                                className='flex items-center gap-2 font-medium'
+                                href={'mailto:duverse@gmail.com'}>
+                                <Mail size={20} color='#60a5fa' />
+                                duverse@gmail.com
+                            </Link>
+                        </div> */}
+                        <Image 
+                        src={assets.contact_form} 
+                        className='absolute z-10 w-full '
+                        alt='contact_form' />
+                        <div className=" rounded-xl shadow-md overflow-hidden w-full h-64 border z-20">
+                            <iframe
+                                className="w-full h-full z-10 grayscale contrast-100 brightness-90 hover:brightness-100 hover:contrast-100 hover:grayscale-0 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] "
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.278223714112!2d77.16464607516632!3d28.59142907568731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1d3cf842aa09%3A0x7c2d506edd36b06f!2sAtma%20Ram%20Sanatan%20Dharma%20College!5e0!3m2!1sen!2sin!4v1749195697248!5m2!1sen!2sin"
+                                loading="lazy"
+                                allowFullScreen
+                            // referrerpolicy="no-referrer-when-downgrade"
+                            ></iframe>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import { Facebook, Heart, Instagram, Link2, Youtube } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-import { DropdownMenuSeparator } from '../ui/dropdown-menu'
+import { DropdownMenuSeparator } from './ui/dropdown-menu'
 
 const Footer = () => {
 
@@ -84,7 +84,8 @@ const Footer = () => {
                     </h1>
                     <h1 className='flex items-center gap-[3px]'>
                         Made with <Heart strokeWidth={0} size={16} fill='red' /> by
-                        <Link href='https://linkedin.com/in/itzpa1' className='hover:text-blue-400 text-blue-600'>Pawan Kumar</Link>
+                        {/* <Link href='https://linkedin.com/in/itzpa1' className='hover:text-blue-400 text-blue-600'>Pawan Kumar</Link> */}
+                        <Link href='https://arsdcollege.ac.in/' className='hover:text-blue-400 text-blue-600'>ARSDians</Link>
                     </h1>
                 </div>
 

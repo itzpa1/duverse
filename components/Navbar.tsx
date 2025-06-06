@@ -8,8 +8,8 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
-import { Button } from '../ui/button'
+} from './ui/dropdown-menu'
+import { Button } from './ui/button'
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 
@@ -62,7 +62,7 @@ export function Navbar() {
                 <div className='flex gap-6 items-center text-lg font-medium text-black'>
                     {
                         navItems.map(({ name, href, subItems }) => (
-                            <Link href={href} className={cn(pathname == href && 'text-blue-400 duration-400 ', "hover:text-blue-400")} key={name}>
+                            <Link href={href} className={cn(pathname == href && 'text-blue-400 duration-400')} key={name}>
                                 {name == 'Study Resources' ?
                                     (
                                         <DropdownMenu>
@@ -79,7 +79,9 @@ export function Navbar() {
                                             </DropdownMenuContent>
                                         </DropdownMenu>)
                                     :
-                                    (name)
+                                    <p className='py-1 px-2 rounded-sm animate-ping-large hover:text-blue-400 hover:bg-blue-50   '>
+                                        {name}
+                                    </p>
                                 }
                             </Link>
                         ))
