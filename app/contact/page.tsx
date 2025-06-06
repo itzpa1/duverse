@@ -11,8 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
 import { useState } from "react"
-import Link from 'next/link';
-import { CheckCircle, CornerUpRight, Mail } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from '@/assets/assets';
 
@@ -26,7 +25,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>
 
 const ContactForm = () => {
-    const [success, setSuccess] = useState(false)
+    // const [success, setSuccess] = useState(false)
 
     const {
         register,
