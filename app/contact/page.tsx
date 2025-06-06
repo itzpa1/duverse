@@ -10,7 +10,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
-import { useState } from "react"
 import { CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from '@/assets/assets';
