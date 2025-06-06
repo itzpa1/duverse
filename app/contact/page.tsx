@@ -10,7 +10,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
-import { CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from '@/assets/assets';
 
@@ -24,7 +23,6 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>
 
 const ContactForm = () => {
-    const [success, setSuccess] = useState(false)
 
     const {
         register,
@@ -115,9 +113,6 @@ const ContactForm = () => {
                             </Button>
                         </form>
 
-                        {success && <p className="text-green-600 font-medium flex items-center">
-                            <CheckCircle size={40} />
-                            Message sent successfully!</p>}
                     </div>
 
 
