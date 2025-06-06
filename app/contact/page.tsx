@@ -130,7 +130,7 @@ const ContactForm = () => {
                         src={assets.contact_form} 
                         className='absolute z-10 w-full '
                         alt='contact_form' />
-                        <div className=" rounded-xl shadow-md overflow-hidden w-full h-64 border z-20">
+                        <div className=" rounded-xl shadow-md overflow-hidden w-full h-64 border z-20 bg-white">
                             <iframe
                                 className="w-full h-full z-10 grayscale contrast-100 brightness-90 hover:brightness-100 hover:contrast-100 hover:grayscale-0 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] "
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.278223714112!2d77.16464607516632!3d28.59142907568731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1d3cf842aa09%3A0x7c2d506edd36b06f!2sAtma%20Ram%20Sanatan%20Dharma%20College!5e0!3m2!1sen!2sin!4v1749195697248!5m2!1sen!2sin"
