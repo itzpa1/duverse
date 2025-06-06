@@ -24,7 +24,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>
 
 const ContactForm = () => {
-    // const [success, setSuccess] = useState(false)
+    const [success, setSuccess] = useState(false)
 
     const {
         register,
@@ -69,7 +69,7 @@ const ContactForm = () => {
 
     return (
         <div className='w-full sm:px-4 px-14 py-4 md:py-6 mt-10 flex flex-col items-center justify-center'>
-            <SectionHeader title='Contact Us ☎️' subtitle='Have questions or feedback? We&apos;d love to hear from you.' pt={4} />
+            <SectionHeader title='Contact Us ☎️' subtitle='Have questions or feedback? We&apos;d love to hear from you.' />
             <div className=" px-4 flex mt-4 justify-center">
                 <div className="bg-white rounded-2xl shadow-xl w-full max-w-6xl flex flex-col md:flex-row overflow-hidden">
 
