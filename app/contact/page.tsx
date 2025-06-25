@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
 import Image from 'next/image';
 import { assets } from '@/assets/assets';
+import { MapPinnedIcon } from 'lucide-react';
 
 const formSchema = z.object({
     name: z.string().min(1, "Name is required"),
@@ -66,10 +67,10 @@ const ContactForm = () => {
 
 
     return (
-        <div className='w-full sm:px-4 px-14 py-4 md:py-6 mt-10 flex flex-col items-center justify-center'>
+        <div className='w-full container mx-auto py-6 mt-20 flex flex-col items-center justify-center'>
             <SectionHeader title='Contact Us ☎️' subtitle='Have questions or feedback? We&apos;d love to hear from you.' />
             <div className=" px-4 flex mt-4 justify-center">
-                <div className="bg-white rounded-2xl shadow-xl w-full max-w-6xl flex flex-col md:flex-row overflow-hidden">
+                <div className="bg-white rounded-2xl shadow-lg w-full max-w-6xl flex flex-col md:flex-row overflow-hidden">
 
                     {/* Left: Contact Form */}
                     <div className="w-full md:w-1/2 p-8 space-y-6 bg-blue-50 from-white to-blue-50 group">
@@ -118,19 +119,14 @@ const ContactForm = () => {
 
                     {/* Right: Map + Info */}
                     <div className="w-full md:w-1/2 p-8 bg-white flex flex-col justify-end gap-4 relative ">
-                        {/* <div className="flex flex-col">
-                            <Link
-                                className='flex items-center gap-2 font-medium'
-                                href={'mailto:duverse@gmail.com'}>
-                                <Mail size={20} color='#60a5fa' />
-                                duverse@gmail.com
-                            </Link>
-                        </div> */}
-                        <Image 
-                        src={assets.contact_form} 
-                        className='absolute z-10 w-full '
-                        alt='contact_form' />
-                        <div className=" rounded-xl shadow-md overflow-hidden w-full h-64 border z-20 bg-white">
+                        <Image
+                            src={assets.contact_form}
+                            className='absolute z-10 w-full '
+                            alt='contact_form' />
+                        <div className=" rounded-xl shadow-md overflow-hidden w-full h-64 border z-20 bg-white relative">
+                            <div className='absolute m-auto flex items-center w-full h-full justify-center'>
+                                <MapPinnedIcon size={20} className='text-blue-50' /> Loading ....
+                            </div>
                             <iframe
                                 className="w-full h-full z-10 grayscale contrast-100 brightness-90 hover:brightness-100 hover:contrast-100 hover:grayscale-0 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] "
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.278223714112!2d77.16464607516632!3d28.59142907568731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1d3cf842aa09%3A0x7c2d506edd36b06f!2sAtma%20Ram%20Sanatan%20Dharma%20College!5e0!3m2!1sen!2sin!4v1749195697248!5m2!1sen!2sin"

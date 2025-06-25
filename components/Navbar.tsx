@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Heart, Menu, X } from 'lucide-react'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 
 export function Navbar() {
+    const [menuOpen, setMenuOpen] = useState(true)
     const pathname = usePathname()
 
 
@@ -39,9 +40,9 @@ export function Navbar() {
             subItems: [
                 { name: 'PYQs', href: '/pyqs' },
                 { name: 'Notes', href: '/notes' },
+                { name: 'YouTube Lectures', href: '/youtube-resources' },
+                { name: 'Syllabus', href: '/syllabus' },
                 { name: 'Books', href: '/books' },
-                { name: 'Assignments', href: '/assignments' },
-                { name: 'YouTube Sources', href: '/youtube-resources' },
             ]
         },
         { name: 'Papers', href: '/papers' },
@@ -50,16 +51,23 @@ export function Navbar() {
     ]
 
     return (
-        <header className={`fixed top-0 z-50 w-full bg-white px-14 sm:px-4 mx-auto items-center justify-items-center ${isScrolled
-            ? 'bg-white/80 dark:bg-black/80 backdrop-blur-sm '
+        <header className={`fixed top-0 z-50 w-full bg-white md:px-14 px-4 mx-auto items-center justify-items-center ${isScrolled
+            ? 'bg-white/50 dark:bg-black/80 backdrop-blur-sm '
             : 'bg-transparent'
             }`}>
-            <div className="container flex h-16 items-center justify-between w-full">
+            <div className="container flex h-16 items-center justify-between w-full relative">
                 <Link href={'/'} className='text-3xl font-bold flex items-center text-black'>
                     DU<span className='text-blue-400'>Verse</span>
 
                 </Link>
-                <div className='flex gap-6 items-center text-lg font-medium text-black'>
+                {menuOpen ?
+                    <Menu className='z-30 md:hidden' onClick={() => setMenuOpen(false)} size={40} />
+                    : <X className='z-30 md:hidden' onClick={() => setMenuOpen(true)} size={40} />
+                }
+                <div className={`${menuOpen
+                    ? 'hidden'
+                    : 'flex'
+                    } md:flex flex-col md:flex-row pt-12 px-4 md:p-0 absolute md:relative top-0 -right-4 gap-4 md:gap-6 text-lg font-medium text-black bg-gradient-to-t from-blue-100 to-white md:from-transparent md:to-transparent h-screen w-2/3 md:h-auto md:w-auto items-center`}>
                     {
                         navItems.map(({ name, href, subItems }) => (
                             <Link href={href} className={cn(pathname == href && 'text-blue-400 duration-400')} key={name}>
@@ -71,9 +79,11 @@ export function Navbar() {
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent className="w-auto">
                                                 {subItems?.map(({ name, href }) => (
-                                                    <DropdownMenuItem key={name}>
-                                                        <Link href={`/resources${href}`}>{name}</Link>
-                                                    </DropdownMenuItem>
+                                                    <Link href={`/resources${href}`} key={name}>
+                                                        <DropdownMenuItem>
+                                                            {name}
+                                                        </DropdownMenuItem>
+                                                    </Link>
                                                 ))}
 
                                             </DropdownMenuContent>
@@ -86,6 +96,11 @@ export function Navbar() {
                             </Link>
                         ))
                     }
+                    <h1 className='absolute bottom-8 right-4 w-full font-normal md:hidden flex flex-col text-sm items-center gap-[3px]'>
+                        Made with <Heart strokeWidth={0} size={16} fill='red' /> by
+                        {/* <Link href='https://linkedin.com/in/itzpa1' className='hover:text-blue-400 text-blue-600'>Pawan Kumar</Link> */}
+                        <Link href='https://arsdcollege.ac.in/' className='hover:text-blue-400 text-blue-600'>ARSDians</Link>
+                    </h1>
                 </div>
             </div>
         </header>
